@@ -1,0 +1,27 @@
+﻿@using Backend4.Models
+@model Backend4.Models.SecondStepCreateViewModel
+@{
+    ViewBag.Title = "Sign up";
+    var allMonths = ViewBag.AllMonths as Month[];
+    var monthsMap = allMonths.ToDictionary(x => x.Id);
+    var allGenders = ViewBag.AllGenders as Gender[];
+    var gendersMap = allGenders.ToDictionary(x => x.Id);
+}
+
+<h2>Sign up result</h2>
+<dl class="dl-horizontal">
+    <dt>First name</dt>
+    <dd>@Model.FirstName</dd>
+    <dt>Last name</dt>
+    <dd>@Model.LastName</dd>
+    <dt>Birthday</dt>
+    <dd>@monthsMap[Model.Month].Name @Model.Day, @Model.Year</dd>
+    <dt>Email</dt>
+    <dd>@Model.Email</dd>
+    <dt>Password</dt>
+    <dd>@Model.Password</dd>
+    <dt>User existed</dt>
+    <dd>@Model.Existed</dd>
+    <dt>Remembered</dt>
+    <dd>@Model.IsRemembered</dd>
+</dl>

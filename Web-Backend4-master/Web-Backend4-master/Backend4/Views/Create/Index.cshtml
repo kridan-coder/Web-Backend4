@@ -1,0 +1,68 @@
+﻿@model Backend4.Models.FirstStepCreateViewModel
+@{
+    ViewBag.Title = "Sign up";
+}
+
+<h2>Sign up</h2>
+
+<form asp-action="Index" class="form-horizontal">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" asp-for="FirstName"></label>
+        <div class="col-md-10">
+            <input type="text" asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" asp-for="LastName"></label>
+        <div class="col-md-10">
+            <input type="text" asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Birthday</label>
+        <div class="col-md-10 form-inline">
+
+            <select asp-for="Day" asp-items="@(new SelectList(ViewBag.AllDays))" class="form-control">
+            </select>
+            <span asp-validation-for="Day"></span>
+
+            <select asp-for="Month" asp-items="@(new SelectList(ViewBag.AllMonths, "Id", "Name"))" class="form-control">
+            </select>
+            <span asp-validation-for="Month"></span>
+
+
+            <select asp-for="Year" asp-items="@(new SelectList(ViewBag.AllYears))" class="form-control">
+            </select>
+            <span asp-validation-for="Year"></span>
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Gender" class="col-md-2 control-label">Gender</label>
+        <div class="col-md-10">
+            @foreach (var gender in ViewBag.AllGenders)
+            {
+                <div class="radio">
+                    <label for="Gender_@gender.Id">
+                        <input id="Gender_@gender.Id" asp-for="Gender" type="radio" value="@gender.Id" />
+                        @gender.Name
+                    </label>
+                </div>
+            }
+            <span asp-validation-for="Gender"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button Name="signUp" value="true" class="btn btn-primary">Sign up</button>
+        </div>
+    </div>
+</form>

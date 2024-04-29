@@ -1,0 +1,53 @@
+﻿@using Backend4.Models 
+@model Backend4.Models.FirstStepCreateViewModel
+@{
+    ViewBag.Title = "Sign up";
+    var allMonths = ViewBag.AllMonths as Month[];
+    var monthsMap = allMonths.ToDictionary(x => x.Id);
+    var allGenders = ViewBag.AllGenders as Gender[];
+    var gendersMap = allGenders.ToDictionary(x => x.Id);
+}
+
+<h2>Sign up</h2>
+<p>User with same profile data already exists. Are you sure you want to sign up?</p>
+
+<form asp-action="SignUpAlreadyExists" class="form-horizontal">
+    <input asp-for="FirstName" type="hidden" />
+    <input asp-for="LastName" type="hidden" />
+    <input asp-for="Day" type="hidden" />
+    <input asp-for="Month" type="hidden" />
+    <input asp-for="Year" type="hidden" />
+    <input asp-for="Gender" type="hidden" />
+
+
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">First name</label>
+        <div class="col-md-10">
+            <p class="form-control-static">@Model.FirstName</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Last name</label>
+        <div class="col-md-10">
+            <p class="form-control-static">@Model.LastName</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Birthday</label>
+        <div class="col-md-10 form-inline">
+            <p class="form-control-static">@monthsMap[Model.Month].Name @Model.Day, @Model.Year</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Gender</label>
+        <div class="col-md-10">
+            <p class="form-control-static">@gendersMap[(int)Model.Gender].Name</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button Name="signUpAnyway" value="true" class="btn btn-primary">Sign up anyway</button>
+        </div>
+    </div>
+</form>
